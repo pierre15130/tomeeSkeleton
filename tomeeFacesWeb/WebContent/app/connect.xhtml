@@ -36,7 +36,7 @@
 	  
 					<p:commandButton value="Follow" action="#{userManagedBean.connectUser}">
 						<f:setPropertyActionListener value="#{loginManagedBean.user}" target="#{userManagedBean.user1}" />
-						<f:setPropertyActionListener value="user" target="#{userManagedBean.user2}" />
+						<f:setPropertyActionListener value="#{user}" target="#{userManagedBean.user2}" />
 					</p:commandButton>   
 	            </h:panelGrid>  
 	        </p:panel>  
