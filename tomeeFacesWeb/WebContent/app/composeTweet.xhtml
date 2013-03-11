@@ -15,24 +15,28 @@
 <h:body background="../resources/images/background.jpg">
 	
 	<h:form id="composeTweetForm">
-		<p:dialog visible="true" resizable="false" draggable="false" position="center top" closable="false">
-			<h:panelGrid columns="3">
-				<h:outputText value="Tweet:"/>
-				<p:inputText id="contenu" value="#{tweetManagedBean.contenu}" required="true" label="What's happening"/>
-				<p:message for="contenu" />
-				
+		
+		<p:menubar>  
+			<p:menuitem value="Home" action="#{loginManagedBean.home}"  icon="ui-icon-home"/>  
+			<p:menuitem value="@Connect" action="#{loginManagedBean.connect}" />       
+			<p:menuitem value="#Discover" action="#{loginManagedBean.discover}" />
+			<p:menuitem value="Me"  action="#{loginManagedBean.me}"  icon="ui-icon-person"/>
+			<p:menuitem value="Compose tweet"  action="#{loginManagedBean.composeTweet}"  icon="ui-icon-pencil"/>
+			<p:menuitem value="Disconnect"  action="#{loginManagedBean.disconnect}"  icon="ui-icon-close"/>
+		</p:menubar> 
+		
+		<h:panelGrid lines="3">
+			<h:outputText value="What's hapenning :"/>
+			<!--  <p:inputText id="contenu" value="#{tweetManagedBean.contenu}" required="true" label="What's happening"/>
+			<p:message for="contenu" />-->
 			
-			</h:panelGrid>
-			
-			<p:messages globalOnly="true" showDetail="true"/>
-			
-			<f:facet name="footer">
-				<h:commandButton value="Tweet" action="#{tweetManagedBean.tweeter}">
-   					<f:setPropertyActionListener value="#{loginManagedBean.user}" target="#{tweetManagedBean.user}"/>
-				</h:commandButton>
-				
-			</f:facet>
-		</p:dialog>
+			<p:inputTextarea resizable="false" rows="5" cols="30" counter="counter" maxlength="140" counterTemplate="{0} characters remaining." value="#{tweetManagedBean.contenu}"/>  
+			<h:outputText id="counter" />  
+			<h:commandButton value="Tweet" action="#{tweetManagedBean.tweeter}">
+				<f:setPropertyActionListener value="#{loginManagedBean.user}" target="#{tweetManagedBean.user}"/>
+			</h:commandButton>
+		</h:panelGrid>
+
 	
 	</h:form>
 
