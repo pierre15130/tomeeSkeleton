@@ -1,0 +1,27 @@
+/* 
+.my-required-style {
+	background: black;
+	color: yellow;	
+} */
+
+.yellowButton
+{    
+  background: #FED942 !important;
+  color: #334E4F !important;
+  font-family: Arial,Helvetica,sans-serif !important;
+}
+
+.blueButton
+{    
+  background: #26A3D8 !important;
+  color: #FFFFFF !important;
+  font-family: Arial,Helvetica,sans-serif !important;
+}
+
+.welcomeText
+{
+	color: #FFFFFF !important;
+	font-family:Arial,Helvetica,sans-serif !important;
+	font-size:x-large;
+	font-weight:bold;
+}

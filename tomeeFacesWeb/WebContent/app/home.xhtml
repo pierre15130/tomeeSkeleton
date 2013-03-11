@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:cc="http://java.sun.com/jsf/composite">
+  
+    <h:head>  
+  
+    </h:head>  
+      
+    <h:body background="../resources/images/home_background.gif">  
+      	<title>Home Twitter</title>
+    <h:form id ="form">  
+    
+    <p:growl id="messages"/>  
+    <p:menubar>  
+        <p:menuitem value="Home" action="#{loginManagedBean.home}"  icon="ui-icon-home"/>  
+ 		<p:menuitem value="@Connect" action="#{loginManagedBean.connect}" />       
+  		<p:menuitem value="#Discover" action="#{loginManagedBean.discover}" />
+  		<p:menuitem value="Me"  action="#{loginManagedBean.me}"  icon="ui-icon-person"/>
+  		<p:menuitem value="Compose tweet"  action="#{loginManagedBean.composeTweet}"  icon="ui-icon-pencil"/>
+        <p:menuitem value="Disconnect"  action="#{loginManagedBean.disconnect}"  icon="ui-icon-close"/>
+        
+    </p:menubar> 
+    
+    
+
+	    <p:dataGrid var="tweet" value="#{loginManagedBean.tweets}" columns="1" >  
+	  
+	        <p:panel header="#{tweet.user.name}  @#{tweet.user.username}  #{tweet.date}" style="text-align:center">  
+	            <h:panelGrid columns="1" style="width:100%">  
+	                <!--  <p:graphicImage value="../resources/images/home_background.gif"/> -->
+	  
+	                <h:outputText value="#{tweet.contenu}" />  
+	  
+	                <p:commandLink update=":form:tweetDetail" oncomplete="tweetDialog.show()" title="View Detail">  
+	                    <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />   
+	                    <f:setPropertyActionListener value="#{tweet}"   
+	                            target="#{loginManagedBean.selectedTweet}" />  
+	                </p:commandLink>  
+	            </h:panelGrid>  
+	        </p:panel>  
+	  
+	    </p:dataGrid>  
+	      
+	    <p:dialog header="Tweet Detail" widgetVar="tweetDialog" modal="true">  
+	        <p:outputPanel id="tweetDetail" style="text-align:center;" layout="block">  
+	          
+	          
+	              
+	            <h:panelGrid  columns="2" cellpadding="5">  
+	                <h:outputLabel for="modelNo" value="Username: " />  
+	                <h:outputText id="modelNo" value="#{loginManagedBean.selectedTweet.user.username}" />  
+	                  
+	                <h:outputLabel for="year" value="Name" />  
+	                <h:outputText id="year" value="#{loginManagedBean.selectedTweet.user.name}" />  
+	                  
+	                <h:outputLabel for="color" value="Contenu" />  
+	                <h:outputText id="color" value="#{loginManagedBean.selectedTweet.contenu}" />  
+	            </h:panelGrid>  
+	        </p:outputPanel>  
+	    </p:dialog>  
+  
+
+            
+	</h:form>  
+             
+          
+    </h:body>  
+</html> 

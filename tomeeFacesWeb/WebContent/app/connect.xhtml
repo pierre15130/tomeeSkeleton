@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:cc="http://java.sun.com/jsf/composite">
+  
+    <h:head>  
+  
+    </h:head>  
+      
+    <h:body background="../resources/images/home_background.gif">  
+      	<title>Connect to other person</title>
+    <h:form id ="form">  
+    
+    <p:growl id="messages"/>  
+    <p:menubar>  
+        <p:menuitem value="Home" action="#{loginManagedBean.home}"  icon="ui-icon-home"/>  
+ 		<p:menuitem value="@Connect" action="#{loginManagedBean.connect}" />       
+  		<p:menuitem value="#Discover" action="#{loginManagedBean.discover}" />
+  		<p:menuitem value="Me"  action="#{loginManagedBean.me}"  icon="ui-icon-person"/>
+  		<p:menuitem value="Compose tweet"  action="#{loginManagedBean.composeTweet}"  icon="ui-icon-pencil"/>
+        <p:menuitem value="Disconnect"  action="#{loginManagedBean.disconnect}"  icon="ui-icon-close"/>
+        
+    </p:menubar> 
+    
+    
+	    <p:dataGrid var="user" value="#{loginManagedBean.all_users}" columns="1" >  
+	  
+	        <p:panel header="#{user.name}" style="text-align:center">  
+	            <h:panelGrid columns="1" style="width:100%">  
+	                <!--  <p:graphicImage value="../resources/images/home_background.gif"/> -->
+	  
+					<p:commandButton value="Follow" action="#{userManagedBean.connectUser}">
+						<f:setPropertyActionListener value="#{loginManagedBean.user}" target="#{userManagedBean.user1}" />
+						<f:setPropertyActionListener value="user" target="#{userManagedBean.user2}" />
+					</p:commandButton>   
+	            </h:panelGrid>  
+	        </p:panel>  
+	  
+	    </p:dataGrid>  
+	      
+	</h:form>  
+             
+          
+    </h:body>  
+</html> 

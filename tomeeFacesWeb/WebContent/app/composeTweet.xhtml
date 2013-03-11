@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:cc="http://java.sun.com/jsf/composite">
+	
+<h:head>
+	<title>Compose Tweet</title>
+	<link rel="stylesheet" href="../resources/css/style.css"/>
+</h:head>
+<h:body background="../resources/images/background.jpg">
+	
+	<h:form id="composeTweetForm">
+		<p:dialog visible="true" resizable="false" draggable="false" position="center top" closable="false">
+			<h:panelGrid columns="3">
+				<h:outputText value="Tweet:"/>
+				<p:inputText id="contenu" value="#{tweetManagedBean.contenu}" required="true" label="What's happening"/>
+				<p:message for="contenu" />
+				
+			
+			</h:panelGrid>
+			
+			<p:messages globalOnly="true" showDetail="true"/>
+			
+			<f:facet name="footer">
+				<h:commandButton value="Tweet" action="#{tweetManagedBean.tweeter}">
+   					<f:setPropertyActionListener value="#{loginManagedBean.user}" target="#{tweetManagedBean.user}"/>
+				</h:commandButton>
+				
+			</f:facet>
+		</p:dialog>
+	
+	</h:form>
+
+</h:body>
+</html>
