@@ -31,9 +31,18 @@ public class TweetService implements TweetServiceLocal {
 	@Override
 	public Tweet create(String contenu, byte[] photo, User u) {
 		
+		u = em.getReference(User.class, u.getId());
 		Tweet tweet = new Tweet(contenu, photo, u);
 		em.persist(tweet);
 		return tweet;
+	}
+
+	@Override
+	public void delete(Tweet t) {
+		// TODO Auto-generated method stub
+		t = em.getReference(Tweet.class, t.getId_tweet());
+		em.remove(t);
+		
 	}
 
 }

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -26,8 +27,9 @@ public class Tweet
 	@Lob
 	private byte[] photo;
 	
-	@ManyToOne (cascade={CascadeType.MERGE})
-	private User user;
+	@ManyToOne (cascade=CascadeType.MERGE)
+	@JoinColumn(name = "user_id")
+	private User user_t;
 	
 	@Transient
 	private String nbMinute;
@@ -40,7 +42,7 @@ public class Tweet
 	public Tweet(String contenu, byte[] photo, User u)
 	{
 		this.contenu = contenu;
-		this.user = u;
+		this.user_t = u;
 		this.photo = photo;
 		this.date = new Date();
 	}
@@ -62,11 +64,11 @@ public class Tweet
 	}
 
 	public User getUser() {
-		return user;
+		return user_t;
 	}
 
 	public void setUser(User user) {
-		this.user = user;
+		this.user_t = user;
 	}
 
 	public byte[] getPhoto() {
@@ -75,6 +77,14 @@ public class Tweet
 
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
+	}
+
+	public String getId_tweet() {
+		return id_tweet;
+	}
+
+	public void setId_tweet(String id_tweet) {
+		this.id_tweet = id_tweet;
 	}
 	
 	

@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -30,16 +29,14 @@ public class User
 	//@Lob
 	//private byte[] avatar;
 	
-	@OneToMany (cascade={CascadeType.ALL})
-	private List<Tweet> liste_tweets;
+	@OneToMany(mappedBy="user_t", cascade=CascadeType.ALL)
+    private List<Tweet> liste_tweets;
 	
-	@ManyToMany
-	private List<User> abonnes;
+	@OneToMany (cascade = {CascadeType.ALL} ,mappedBy="u1")
+	private List<Abonnement> liste_abonnes;
 	
-	
-
-	@ManyToMany
-	private List<User> abonnements;
+	@OneToMany (cascade = {CascadeType.ALL} ,mappedBy="u2")
+	private List<Abonnement> liste_abonnements;
 	
 	// Constructors
 	
@@ -96,35 +93,36 @@ public class User
 		this.username = username;
 	}
 
+
+
+	public List<Tweet> getListe_tweets() {
+		return liste_tweets;
+	}
+
+	public void setListe_tweets(List<Tweet> liste_tweets) {
+		this.liste_tweets = liste_tweets;
+	}
+	
+	public List<Abonnement> getListe_abonnes() {
+		return liste_abonnes;
+	}
+
+	public void setListe_abonnes(List<Abonnement> liste_abonnes) {
+		this.liste_abonnes = liste_abonnes;
+	}
+
+	public List<Abonnement> getListe_abonnements() {
+		return liste_abonnements;
+	}
+
+	public void setListe_abonnements(List<Abonnement> liste_abonnements) {
+		this.liste_abonnements = liste_abonnements;
+	}
+
 	@Override
 	public String toString() {
 		return ""+id+"/"+password;
 	}
-	
-	public List<User> getAbonnes() {
-		return abonnes;
-	}
-
-	public void setAbonnes(List<User> abonnes) {
-		this.abonnes = abonnes;
-	}
-
-	public List<User> getAbonnements() {
-		return abonnements;
-	}
-
-	public void setAbonnements(List<User> abonnements) {
-		this.abonnements = abonnements;
-	}
-
-//	public byte[] getAvatar() {
-//		return avatar;
-//	}
-//
-//	public void setAvatar(byte[] avatar) {
-//		this.avatar = avatar;
-//	}
-
 
 
 }

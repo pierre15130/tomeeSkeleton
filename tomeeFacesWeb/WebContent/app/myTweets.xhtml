@@ -13,9 +13,10 @@
     </h:head>  
       
     <h:body background="../resources/images/home_background.gif">  
-      	<title>Home Twitter</title>
+      	<title>My tweets</title>
+      	
     	<h:form id ="form">  
-    
+   	 		
 		    <p:growl id="messages"/> 
 		    <h:outputText value="connected as @#{loginManagedBean.user.username}"  /> 
 		    <p:menubar>  
@@ -30,7 +31,7 @@
 		    
 		    
 		
-		    <p:dataGrid var="tweet" value="#{loginManagedBean.follow_tweets}" columns="1" >  
+		    <p:dataGrid var="tweet" value="#{loginManagedBean.tweets}" columns="1" >  
 		  
 		        <p:panel header="#{tweet.user.name}  @#{tweet.user.username}  #{tweet.date}" style="text-align:center">  
 		            <h:panelGrid columns="1" style="width:100%">  
@@ -39,12 +40,11 @@
 		                <h:outputText value="#{tweet.contenu}" />  
 		  
 		                <p:commandLink update=":form:tweetDetail" oncomplete="tweetDialog.show()" title="View Detail">  
-		                    <h:outputText  styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />   
+		                    <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />   
 		                    <f:setPropertyActionListener value="#{tweet}" target="#{loginManagedBean.selectedTweet}" />  
 		                </p:commandLink>  
-		                <p:commandButton action="#{tweetManagedBean.retweeter}" value="Retweet">  
-		                    <f:setPropertyActionListener value="#{tweet}" target="#{tweetManagedBean.tweet}" />
-		                    <f:setPropertyActionListener value="#{loginManagedBean.user}" target="#{tweetManagedBean.user}" />   
+   		                <p:commandButton action="#{loginManagedBean.deleteTweet}" value="Delete">  
+		                    <f:setPropertyActionListener value="#{tweet}" target="#{loginManagedBean.tweetToDelete}" />  
 		                </p:commandButton>  
 		            </h:panelGrid>  
 		        </p:panel>  
@@ -60,7 +60,7 @@
 		                <h:outputLabel for="modelNo" value="Username: " />  
 		                <h:outputText id="modelNo" value="#{loginManagedBean.selectedTweet.user.username}" />  
 		                  
-		                <h:outputLabel for="year" value="Name:" />  
+		                <h:outputLabel for="year" value="Name" />  
 		                <h:outputText id="year" value="#{loginManagedBean.selectedTweet.user.name}" />  
 		                  
 		                <h:outputLabel for="color" value="Contenu" />  

@@ -8,5 +8,7 @@ import org.isima.tweeter.model.User;
 @Local
 public interface TweetServiceLocal {
 	Tweet create(String contenu, byte[] photo, User u);
+	
+	void delete(Tweet t);
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import org.isima.tweeter.model.Abonnement;
 import org.isima.tweeter.model.Tweet;
 import org.isima.tweeter.model.User;
 
@@ -18,6 +19,10 @@ public interface UserServiceLocal {
 	
 	List<User> getAllUsers(User u);
 	
-	void connectUser(User u1, User u2);
+	List<Abonnement> getAllAbonnes(User u);
+	
+//	List<Abonnement> getAllNonAbonnes(User u);
+	
+	//void connectUser(User u1, User u2);
 
 }

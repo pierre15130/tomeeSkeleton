@@ -25,45 +25,55 @@ public class TweetManagedBean {
 	
     private Tweet tweet = new Tweet();  
     
-    private User user;
+	private User user;
+	
 	// actions
 	
 	public String tweeter()
 	{
 		try
 		{
-			// try to log in
+			// try to tweet
 			tweet = tweetService.create(contenu, photo, user);
 			if(tweet != null)
 			{
-//				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,  "Logged !", user.toString()));
-//				//récupérer les tweets à afficher
-//				tweets = userService.getListTweet(user);
-//				tweets = new ArrayList<Tweet>();  
-//				tweets.add(new Tweet("test tweet", null, user));
 				return "tweetSuccess";
 			}
 			else
 			{
-//				 FacesMessage msg = new FacesMessage("Error", "Loggin or password unknown");  
-//		         FacesContext.getCurrentInstance().addMessage(null, msg);  
 				 return "tweetFailed";
 			}
-			
-			// or create a new user
-			//user = userService.create(username, password);
-			
-			//FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "User created !", user.toString()));
-
 		}
 		catch(Exception e)
 		{
 			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error !", e.getMessage()) );
 			e.printStackTrace();
-			return "loginFailed";
+			return "tweetFailed";
 		}
 	}
 	
+	public String retweeter()
+	{
+		try
+		{
+			// try to retweet
+			tweet = tweetService.create(tweet.getContenu(),tweet.getPhoto(), user);
+			if(tweet != null)
+			{
+				return "home";
+			}
+			else
+			{
+				 return "tweetFailed";
+			}
+		}
+		catch(Exception e)
+		{
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error !", e.getMessage()) );
+			e.printStackTrace();
+			return "tweetFailed";
+		}
+	}
 	
 	public User getUser() {
 		return user;

@@ -10,6 +10,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import org.isima.tweeter.model.Abonnement;
+import org.isima.tweeter.model.Abonnement_;
 import org.isima.tweeter.model.Tweet;
 import org.isima.tweeter.model.Tweet_;
 import org.isima.tweeter.model.User;
@@ -59,13 +61,7 @@ public class UserService implements UserServiceLocal {
 		return user;
 	}
 
-	@Override
-	public void connectUser(User u1, User u2)
-	{
-		u1.getAbonnes().add(u2);
-		em.merge(u1);
-	}
-	
+
 	@Override
 	public List<Tweet> getListTweet(User user) {
 		//use the criteria builder to create the query expression
@@ -74,7 +70,7 @@ public class UserService implements UserServiceLocal {
 		// select from the Tweet table
 		Root<Tweet> from = criteriabCriteriaQuery.from(Tweet.class);
 		// where 
-		criteriabCriteriaQuery.where(criteriaBuilder.equal(from.get(Tweet_.user), user));
+		criteriabCriteriaQuery.where(criteriaBuilder.equal(from.get(Tweet_.user_t), user));
 		
 		//execute the query
 		TypedQuery<Tweet> query = em.createQuery(criteriabCriteriaQuery);
@@ -86,6 +82,7 @@ public class UserService implements UserServiceLocal {
 		return null;
 
 	}
+	
 
 	@Override
 	public List<User> getAllUsers(User u) {
@@ -108,7 +105,25 @@ public class UserService implements UserServiceLocal {
 		return null;
 	}
 	
-	
-	
-	
+	@Override
+	public List<Abonnement> getAllAbonnes(User u) {
+		// TODO Auto-generated method stub
+		//use the criteria builder to create the query expression
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		CriteriaQuery<Abonnement> criteriabCriteriaQuery = criteriaBuilder.createQuery(Abonnement.class);
+		// select from the User table
+		Root<Abonnement> from = criteriabCriteriaQuery.from(Abonnement.class);
+		// where 
+		criteriabCriteriaQuery.where(criteriaBuilder.equal(from.get(Abonnement_.u1), u));
+		
+		//execute the query
+		TypedQuery<Abonnement> query = em.createQuery(criteriabCriteriaQuery);
+		List<Abonnement> resultList = query.getResultList();
+		if(resultList != null && resultList.size()>0)
+		{
+			return resultList;
+		}
+		return null;
+	}
+
 }

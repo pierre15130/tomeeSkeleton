@@ -13,31 +13,29 @@
 	<link rel="stylesheet" href="../resources/css/style.css"/>
 </h:head>
 <h:body background="../resources/images/background.jpg">
-	
 	<h:form id="composeTweetForm">
-		
+		<h:outputText value="connected as @#{loginManagedBean.user.username}"  />
 		<p:menubar>  
 			<p:menuitem value="Home" action="#{loginManagedBean.home}"  icon="ui-icon-home"/>  
 			<p:menuitem value="@Connect" action="#{loginManagedBean.connect}" />       
 			<p:menuitem value="#Discover" action="#{loginManagedBean.discover}" />
-			<p:menuitem value="Me"  action="#{loginManagedBean.me}"  icon="ui-icon-person"/>
+			<p:menuitem value="MyTweets"  action="#{loginManagedBean.me}"  icon="ui-icon-person"/>
 			<p:menuitem value="Compose tweet"  action="#{loginManagedBean.composeTweet}"  icon="ui-icon-pencil"/>
 			<p:menuitem value="Disconnect"  action="#{loginManagedBean.disconnect}"  icon="ui-icon-close"/>
 		</p:menubar> 
-		
-		<h:panelGrid lines="3">
-			<h:outputText value="What's hapenning :"/>
-			<!--  <p:inputText id="contenu" value="#{tweetManagedBean.contenu}" required="true" label="What's happening"/>
-			<p:message for="contenu" />-->
-			
-			<p:inputTextarea resizable="false" rows="5" cols="30" counter="counter" maxlength="140" counterTemplate="{0} characters remaining." value="#{tweetManagedBean.contenu}"/>  
-			<h:outputText id="counter" />  
-			<h:commandButton value="Tweet" action="#{tweetManagedBean.tweeter}">
-				<f:setPropertyActionListener value="#{loginManagedBean.user}" target="#{tweetManagedBean.user}"/>
-			</h:commandButton>
-		</h:panelGrid>
-
 	
+
+		<p:dialog visible="true" resizable="false" draggable="false" position="center center" closable="false">
+			<h:panelGrid lines="3">
+				<h:outputText value="What's hapenning :"/>
+			
+				<p:inputTextarea resizable="false" rows="5" cols="30" counter="counter" maxlength="140" counterTemplate="{0} characters remaining." value="#{tweetManagedBean.contenu}"/>  
+				<h:outputText id="counter" />  
+				<h:commandButton value="Tweet" action="#{tweetManagedBean.tweeter}">
+					<f:setPropertyActionListener value="#{loginManagedBean.user}" target="#{tweetManagedBean.user}"/>
+				</h:commandButton>
+			</h:panelGrid>
+		</p:dialog>
 	</h:form>
 
 </h:body>
